@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from App1.models import *
+import requests
+from App1.models import Producto
 from django.http import HttpResponse
-from App1.forms import ClienteFormulario
+from App1.forms import ProductoFormulario
+
 # Create your views here.
 def inicio(request):
     return render(request, 'App1/inicio.html')
@@ -13,18 +15,20 @@ def Información(request):
    return render(request, 'App1/informacion.html')
 def Fotos(request):
     return render(request, 'App1/fotos.html')
-def ClienteFormulario(request):
-     if request.method == 'POST':
-        miFormulario = ClienteFormulario(request.POST) # Aqui me llega la informacion del html
+
+def ProductoFormulario(request):
+    if request.method == 'POST':
+        miFormulario = ProductoFormulario(request.POST)
         print(miFormulario)
         
         if miFormulario.is_valid:
             informacion = miFormulario.cleaned_data
-            cliente = Cliente(int(informacion['id']),str(informacion['nombre']),str(informacion['apellido']),
-                                   informacion['email'])
-            cliente.save()
+            producto = Producto(int(informacion['id']),str(informacion['nombre']),int(informacion['paquete']))
+            producto.save()
             return render(request, "App1/inicio.html")
-     else:
-        miFormulario = ClienteFormulario('request')
-             
-     return render(request, "App1/ClienteFormulario.html", {"miFormulario": miFormulario})
+    else:
+            miFormulario = ProductoFormulario()
+ 
+    return render(request, "App1/ProductoFormulario.html", {"miFormulario": miFormulario})
+            
+            

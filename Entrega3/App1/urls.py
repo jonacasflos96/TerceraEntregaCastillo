@@ -8,5 +8,6 @@ urlpatterns=[
     path('Cliente', views.Cliente, name='Cliente'),
     path('Información', views.Información, name='Información'),
     path('Fotos', views.Fotos, name='Fotos'),
-    path('ClienteFormulario', views.ClienteFormulario, name="ClienteFormulario")
+    path('ProductoFormulario', views.ProductoFormulario, name="ProductoFormulario")
+    
 ]
